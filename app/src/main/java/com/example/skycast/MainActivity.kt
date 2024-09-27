@@ -1,5 +1,6 @@
 package com.example.skycast
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Botón para ir a la segunda pantalla.
+        binding.btnForecast.setOnClickListener {
+            goToForecast()
+        }
+
     }
 
     private fun updateUI(weather: WeatherResponse) {
@@ -44,6 +50,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun showPicture(url: String) {
         Picasso.with(this).load(url).into(binding.ivWeatherIcon)
+    }
+
+    private fun goToForecast() {
+        val forecastList = ArrayList(viewModel.weatherData.value?.forecast?.forecastday)
+
+        // Navegar a la segunda actividad con la lista de pronósticos
+        val intent = Intent(this, ForecastActivity::class.java)
+        intent.putExtra("forecastList", forecastList)
+        startActivity(intent)
     }
 
 }
