@@ -15,6 +15,9 @@
         android:theme="@style/Theme.SkyCast"
         tools:targetApi="31">
         <activity
+            android:name=".ForecastActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
